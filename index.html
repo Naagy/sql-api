@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create User</title>
+</head>
+<body>
+  <h1>Create a User</h1>
+  <button onclick="createUser()">Create User</button>
+
+  <script>
+    function createUser() {
+      fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: 'johndoe@example.com',
+          firstName: 'John',
+          lastName: 'Doe',
+          class: '10A'
+        })
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>

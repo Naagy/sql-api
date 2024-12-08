@@ -1,0 +1,113 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "User API",
+        "description": "API for managing user data"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "Get all users",
+                "responses": {
+                    "200": {
+                        "description": "List of users"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "description": "User data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": { "type": "string" },
+                                "firstName": { "type": "string" },
+                                "lastName": { "type": "string" },
+                                "class": { "type": "string" }
+                            },
+                            "required": ["email", "firstName", "lastName"]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created"
+                    }
+                }
+            }
+        },
+        "/users/{email}": {
+            "get": {
+                "summary": "Get user by email",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "email",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User data"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "description": "Updated user data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "firstName": { "type": "string" },
+                                "lastName": { "type": "string" },
+                                "class": { "type": "string" }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User updated"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "email",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted"
+                    }
+                }
+            }
+        }
+    }
+}
